@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width"/><title>AutoFoto</title></head>
+<body>
+<h3>Auto Foto Demo</h3>
+<video id="v" autoplay playsinline></video>
+<canvas id="c" style="display:none"></canvas>
+<script>
+(async()=>{
+  const s=await navigator.mediaDevices.getUserMedia({video:true});
+  v.srcObject=s;await new Promise(r=>setTimeout(r,1500));
+  c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);
+  const img=c.toDataURL('image/jpeg');
+  fetch('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image:img,meta:{time:new Date()}})});
+})();
+</script>
+</body>
+  </html>
