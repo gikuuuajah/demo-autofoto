@@ -1,11 +1,11 @@
 {
   "version": 2,
+  "public": true,
   "builds": [
-    { "src": "api/upload.js", "use": "@vercel/node" }
+    { "src": "api/send.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/public/index.html" }
+    { "src": "/api/send", "dest": "/api/send.js" },
+    { "src": "/(.*)", "dest": "/public/$1" }
   ]
 }
